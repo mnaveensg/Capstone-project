@@ -7,7 +7,8 @@ const courseRoutes     = require('./routes/courseRoutes');
 const enrollmentRoutes = require('./routes/enrollmentRoutes');
 
 const app  = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+const DEBUG = process.env.DEBUG_LOGS === '1';
 
 // ── Middleware ────────────────────────────────────────────────
 app.use(cors());
@@ -26,14 +27,28 @@ app.get('/', (req, res) => {
 // ── Connect to MongoDB and start server ───────────────────────
 // For local MongoDB: mongodb://127.0.0.1:27017/schoolsystem
 // For MongoDB Atlas: replace the URI with your Atlas connection string
-const MONGO_URI = 'mongodb+srv://mnaveensg2:Mn97758529@cluster0.97bypce.mongodb.net/?appName=Cluster0';
-// 'mongodb+srv://mnaveensg2_db_user:Mn97758529@@cluster0.97bypce.mongodb.net/'
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://mnaveensg2:Mn97758529@cluster0.97bypce.mongodb.net/schoolsystem?retryWrites=true&w=majority&appName=Cluster0';
 mongoose
-  .connect(MONGO_URI)
+  .connect(MONGO_URI, { dbName: 'schoolsystem' })
   .then(() => {
-    console.log('MongoDB connected');
+    console.log(`MongoDB connected to database: ${mongoose.connection.name}`);
+    if (DEBUG) {
+      mongoose.connection.db
+        .listCollections({}, { nameOnly: true })
+        .toArray()
+        .then((collections) => {
+          const names = collections.map((c) => c.name).join(', ') || '(none)';
+          console.log(`[debug] Collections in ${mongoose.connection.name}: ${names}`);
+        })
+        .catch((err) => {
+          console.error('[debug] Failed to list collections:', err.message);
+        });
+    }
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
+      if (DEBUG) {
+        console.log('[debug] Debug logs enabled (DEBUG_LOGS=1)');
+      }
     });
   })
   .catch((err) => {

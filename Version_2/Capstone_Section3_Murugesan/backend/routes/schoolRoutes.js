@@ -1,11 +1,15 @@
 const express = require('express');
 const router  = express.Router();
 const School  = require('../models/schoolModel');
+const DEBUG   = process.env.DEBUG_LOGS === '1';
 
 // GET /api/schools — return all schools
 router.get('/', async (req, res) => {
   try {
     const schools = await School.find();
+    if (DEBUG) {
+      console.log(`[debug] GET /api/schools -> db=${School.db.name}, collection=${School.collection.name}, count=${schools.length}`);
+    }
     res.json(schools);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -31,6 +35,9 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ error: 'name, address, and principal are required.' });
     }
     const school = await School.create({ name, address, principal });
+    if (DEBUG) {
+      console.log(`[debug] POST /api/schools -> inserted _id=${school._id}`);
+    }
     res.status(201).json(school);
   } catch (err) {
     res.status(500).json({ error: err.message });
