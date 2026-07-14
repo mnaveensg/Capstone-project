@@ -1,0 +1,3 @@
+# Ignore installed dependencies across all Node projects in this workspace
+node_modules/
+**/node_modules/
