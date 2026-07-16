@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-// ─── Login Component ──────────────────────────────────────────────────────────
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,7 +14,6 @@ function Login() {
       setMessage('Invalid email format.');
     } else {
       setMessage('Login successful!');
-      // API call or redirection can be added here
     }
   };
 
@@ -44,7 +42,6 @@ function Login() {
   );
 }
 
-// ─── Course Recommender Component ────────────────────────────────────────────
 function CourseRecommender() {
   const [interest, setInterest] = useState('');
   const [recommended, setRecommended] = useState('');

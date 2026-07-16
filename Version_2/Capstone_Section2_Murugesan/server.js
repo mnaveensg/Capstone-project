@@ -5,46 +5,41 @@ const express = require('express');
 const app = express();
 
 // Define the port number to run the server on
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
-// ── Middleware ────────────────────────────────────────────────────────────────
-
-// Parse JSON bodies in incoming requests
+// 1. Middleware to parse JSON bodies in requests
 app.use(express.json());
 
-// ── Routes ────────────────────────────────────────────────────────────────────
-
-// 1. Basic GET route for homepage
+// 2. Basic GET route for homepage
 app.get('/', (req, res) => {
   res.send('Welcome to the LMS backend!');
 });
 
-// 2. GET /courses — Return a sample list of available courses
+// 3. GET route to return a sample list of courses
 app.get('/courses', (req, res) => {
   const courses = [
     { id: 1, name: 'React for Beginners' },
     { id: 2, name: 'Intro to Data Science' },
     { id: 3, name: 'AI Fundamentals' },
   ];
+
   res.json(courses);
 });
 
-// 3. POST /enroll — Enroll a user in a course
-//    Required body fields: userId, courseId
-//    Returns 400 if either field is missing.
+// 4. POST /enroll route to enroll a user in a course
 app.post('/enroll', (req, res) => {
   const { userId, courseId } = req.body;
 
-  // Validate that both fields are present
   if (!userId || !courseId) {
     return res.status(400).json({ error: 'Missing userId or courseId in request.' });
   }
 
-  res.json({ message: `User ${userId} successfully enrolled in course ${courseId}.` });
+  return res.json({
+    message: `User ${userId} successfully enrolled in course ${courseId}.`,
+  });
 });
 
-// ── Start server ──────────────────────────────────────────────────────────────
-
+// 5. Start the Express server and listen on PORT
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });

@@ -10,12 +10,19 @@
       padding: 20px;
       background-color: #f5f7fa;
     }
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
     .section {
       background: white;
       padding: 20px;
-      margin-bottom: 20px;
       border-radius: 10px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      flex: 0 0 calc(50% - 10px);
+      max-width: calc(50% - 10px);
+      box-sizing: border-box;
     }
     h2 {
       color: #1a73e8;
@@ -28,12 +35,31 @@
       padding: 8px;
       margin: 5px 0;
       width: 100%;
+      box-sizing: border-box;
+    }
+    .email-form {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+      margin-bottom: 5px;
+    }
+    .email-form input {
+      flex: 1;
+      width: auto;
+      margin-right: 0;
+    }
+    .email-form button {
+      width: auto;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
   </style>
 </head>
 <body>
 
   <h1>AI-Powered LMS: JavaScript Practice</h1>
+
+  <div class="card-grid">
 
   <!-- Example 1: Button Interactivity with Alert -->
   <div class="section">
@@ -64,7 +90,7 @@
   <!-- Task 1: Validate Learner Email -->
   <div class="section">
     <h2>3. Validate Learner Email</h2>
-    <form onsubmit="return validateEmail()">
+    <form class="email-form" onsubmit="validateEmail(); return false;">
       <input type="text" id="email" placeholder="Enter your email to receive updates">
       <button type="submit">Submit</button>
     </form>
@@ -76,17 +102,20 @@
         let emailInput = document.getElementById("email").value;
         let emailMessage = document.getElementById("emailMessage");
 
-        // If email does not include '@', show error message and stop submission
+        // If email does not include '@', show error message
         if (!emailInput.includes("@")) {
           emailMessage.textContent = "Invalid email address";
           emailMessage.style.color = "red";
-          return false;
+          return;
         }
 
-        // If valid, show success message and allow submission
+        // If valid, show success message, then reset after 3 seconds
         emailMessage.textContent = "Email accepted!";
         emailMessage.style.color = "green";
-        return true;
+        setTimeout(function () {
+          emailMessage.textContent = "";
+          document.getElementById("email").value = "";
+        }, 1000);
       }
     </script>
   </div>
@@ -106,6 +135,8 @@
       });
     </script>
   </div>
+
+  </div><!-- end card-grid -->
 
 </body>
 </html>

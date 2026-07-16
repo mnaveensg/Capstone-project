@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-// ─── Password Strength Checker Component ─────────────────────────────────────
-// Checks whether a password is "Strong" (≥6 chars AND contains a number)
-// or "Weak" (fails either condition).
 function PasswordStrength() {
   const [password, setPassword] = useState('');
   const [result, setResult] = useState('');
@@ -15,7 +12,6 @@ function PasswordStrength() {
     } else if (password.length >= 6 && hasNumber) {
       setResult('Strong password');
     } else {
-      // ≥6 characters but no number
       setResult('Weak password');
     }
   };

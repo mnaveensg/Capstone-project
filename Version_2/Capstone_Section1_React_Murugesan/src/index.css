@@ -6,8 +6,8 @@ body {
 }
 
 h1 {
-  color: #1a73e8;
-  border-bottom: 2px solid #1a73e8;
+  color: #e84a1a;
+  border-bottom: 2px solid #e8961a;
   padding-bottom: 10px;
 }
 
@@ -20,6 +20,6 @@ h1 {
 }
 
 .section-card h2 {
-  color: #1a73e8;
+  color: #e84a1a;
   margin-top: 0;
 }

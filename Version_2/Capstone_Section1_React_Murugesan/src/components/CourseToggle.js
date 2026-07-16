@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-// ─── Course Description Toggle Component ─────────────────────────────────────
-// Toggles the visibility of a course description on button click.
-// Button label updates to reflect current state: "Show Description" / "Hide Description".
 function CourseToggle() {
   const [isVisible, setIsVisible] = useState(false);
 

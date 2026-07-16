@@ -1,6 +1,15 @@
 // Step 1: Select (or create) the database
 // use schoolsystem
 
+const schoolOneId = ObjectId("665f1fa4a7d3f1a0aabc1001")
+const schoolTwoId = ObjectId("665f1fa4a7d3f1a0aabc1002")
+const schoolThreeId = ObjectId("665f1fa4a7d3f1a0aabc1003")
+
+const htmlCourseId = ObjectId()
+const cssCourseId = ObjectId()
+const mysqlCourseId = ObjectId()
+const aiCourseId = ObjectId()
+
 // ─────────────────────────────────────────
 // Step 2: Create Collections (Tables)
 // ─────────────────────────────────────────
@@ -14,9 +23,9 @@ db.createCollection("enrollments")
 // ─────────────────────────────────────────
 
 db.schools.insertMany([
-  { "_id": ObjectId("665f1fa4a7d3f1a0aabc1001"), "name": "Greenwood High School", "address": "123 Maple Street, Springfield", "principal": "Mr. John Adams" },
-  { "_id": ObjectId("665f1fa4a7d3f1a0aabc1002"), "name": "Riverside Public School", "address": "456 Oak Avenue, Riverdale", "principal": "Ms. Linda Carter" },
-  { "_id": ObjectId("665f1fa4a7d3f1a0aabc1003"), "name": "Seatrium Academy", "address": "789 Harbour Road, Singapore", "principal": "Mr. Naveen Murugesan" }
+  { "_id": schoolOneId, "name": "Greenwood High School", "address": "123 Maple Street, Springfield", "principal": "Mr. John Adams" },
+  { "_id": schoolTwoId, "name": "Riverside Public School", "address": "456 Oak Avenue, Riverdale", "principal": "Ms. Linda Carter" },
+  { "_id": schoolThreeId, "name": "Seatrium Academy", "address": "789 Harbour Road, Singapore", "principal": "Mr. Naveen Murugesan" }
 ])
 
 // ─────────────────────────────────────────
@@ -24,10 +33,10 @@ db.schools.insertMany([
 // ─────────────────────────────────────────
 
 db.courses.insertMany([
-  { "title": "HTML Basics", "description": "Introduction to HTML and web structure.", "school": ObjectId("665f1fa4a7d3f1a0aabc1001") },
-  { "title": "CSS Design", "description": "Learn how to style websites using CSS.", "school": ObjectId("665f1fa4a7d3f1a0aabc1001") },
-  { "title": "MySQL for Beginners", "description": "Basic concepts of relational databases.", "school": ObjectId("665f1fa4a7d3f1a0aabc1002") },
-  { "title": "AI Fundamentals", "description": "Introduction to artificial intelligence concepts.", "school": ObjectId("665f1fa4a7d3f1a0aabc1002") }
+  { "_id": htmlCourseId, "title": "HTML Basics", "description": "Introduction to HTML and web structure.", "school": schoolOneId },
+  { "_id": cssCourseId, "title": "CSS Design", "description": "Learn how to style websites using CSS.", "school": schoolOneId },
+  { "_id": mysqlCourseId, "title": "MySQL for Beginners", "description": "Basic concepts of relational databases.", "school": schoolTwoId },
+  { "_id": aiCourseId, "title": "AI Fundamentals", "description": "Introduction to artificial intelligence concepts.", "school": schoolTwoId }
 ])
 
 // ─────────────────────────────────────────
@@ -35,10 +44,10 @@ db.courses.insertMany([
 // ─────────────────────────────────────────
 
 db.enrollments.insertMany([
-  { "studentName": "Alice Johnson", "studentEmail": "alice@example.com", "course": "HTML Basics", "enrollmentDate": new Date("2024-01-10") },
-  { "studentName": "Bob Smith", "studentEmail": "bob@example.com", "course": "CSS Design", "enrollmentDate": new Date("2024-02-15") },
-  { "studentName": "Charlie Lee", "studentEmail": "charlie@example.com", "course": "HTML Basics", "enrollmentDate": new Date("2024-03-01") },
-  { "studentName": "Daniel Rose", "studentEmail": "daniel@lms.com", "course": "CSS Design", "enrollmentDate": new Date() }
+  { "studentName": "Alice Johnson", "studentEmail": "alice@example.com", "course": htmlCourseId, "enrollmentDate": new Date("2024-01-10") },
+  { "studentName": "Bob Smith", "studentEmail": "bob@example.com", "course": cssCourseId, "enrollmentDate": new Date("2024-02-15") },
+  { "studentName": "Charlie Lee", "studentEmail": "charlie@example.com", "course": htmlCourseId, "enrollmentDate": new Date("2024-03-01") },
+  { "studentName": "Daniel Rose", "studentEmail": "daniel@lms.com", "course": cssCourseId, "enrollmentDate": new Date() }
 ])
 
 // ─────────────────────────────────────────
