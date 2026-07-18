@@ -60,8 +60,6 @@
   <h1>AI-Powered LMS: JavaScript Practice</h1>
 
   <div class="card-grid">
-
-  <!-- Example 1: Button Interactivity with Alert -->
   <div class="section">
     <h2>1. Enroll in Course</h2>
     <button onclick="enroll()">Click to Enroll</button>
@@ -71,8 +69,6 @@
       }
     </script>
   </div>
-
-  <!-- Example 2: DOM Manipulation -->
   <div class="section">
     <h2>2. AI Suggestion Box</h2>
     <p id="suggestionText">Click the button below to get a course suggestion.</p>
@@ -86,8 +82,6 @@
       }
     </script>
   </div>
-
-  <!-- Task 1: Validate Learner Email -->
   <div class="section">
     <h2>3. Validate Learner Email</h2>
     <form class="email-form" onsubmit="validateEmail(); return false;">
@@ -97,19 +91,14 @@
     <p id="emailMessage" class="highlight"></p>
 
     <script>
-      // TASK COMPLETED: Email validation function
       function validateEmail() {
         let emailInput = document.getElementById("email").value;
         let emailMessage = document.getElementById("emailMessage");
-
-        // If email does not include '@', show error message
         if (!emailInput.includes("@")) {
           emailMessage.textContent = "Invalid email address";
           emailMessage.style.color = "red";
           return;
         }
-
-        // If valid, show success message, then reset after 3 seconds
         emailMessage.textContent = "Email accepted!";
         emailMessage.style.color = "green";
         setTimeout(function () {
@@ -119,15 +108,12 @@
       }
     </script>
   </div>
-
-  <!-- Task 2: Keypress Event Handling -->
   <div class="section">
     <h2>4. Type Your Learning Goal</h2>
     <input type="text" id="goalInput" placeholder="e.g., Master JavaScript...">
     <p id="goalOutput">Your goal: </p>
 
     <script>
-      // TASK COMPLETED: Input event handler that updates #goalOutput as the user types
       let goalInput = document.getElementById("goalInput");
 
       goalInput.addEventListener("input", function () {
@@ -136,7 +122,7 @@
     </script>
   </div>
 
-  </div><!-- end card-grid -->
+  </div>
 
 </body>
 </html>

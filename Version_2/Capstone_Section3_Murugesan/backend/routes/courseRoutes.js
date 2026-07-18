@@ -1,8 +1,6 @@
 const express = require('express');
 const router  = express.Router();
 const Course  = require('../models/courseModel');
-
-// GET /api/courses — return all courses (populate school reference)
 router.get('/', async (req, res) => {
   try {
     const courses = await Course.find().populate('school', 'name');
@@ -11,8 +9,6 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-// GET /api/courses/:id — return one course
 router.get('/:id', async (req, res) => {
   try {
     const course = await Course.findById(req.params.id).populate('school', 'name');
@@ -22,8 +18,6 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-// POST /api/courses — create a new course
 router.post('/', async (req, res) => {
   try {
     const { title, description, school } = req.body;
@@ -36,8 +30,6 @@ router.post('/', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-// PUT /api/courses/:id — update a course
 router.put('/:id', async (req, res) => {
   try {
     const course = await Course.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -47,8 +39,6 @@ router.put('/:id', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-// DELETE /api/courses/:id — delete a course
 router.delete('/:id', async (req, res) => {
   try {
     const course = await Course.findByIdAndDelete(req.params.id);

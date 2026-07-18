@@ -4,7 +4,7 @@ const schoolSchema = new mongoose.Schema(
   {
     name:      { type: String, required: true },
     address:   { type: String, required: true },
-    principal: { type: String, required: true },
+    principal: { type: String, required: true }
   },
   { collection: 'schools' }
 );

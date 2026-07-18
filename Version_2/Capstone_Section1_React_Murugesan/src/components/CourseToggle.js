@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 function CourseToggle() {
   const [isVisible, setIsVisible] = useState(false);
-
   const toggleDescription = () => {
     setIsVisible(!isVisible);
   };
